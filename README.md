@@ -71,15 +71,25 @@ Tiap sampel punya citra mikrostruktur dan spektrum komposisi, tanpa label.
 
 ```
 .
-├── laporan.pdf                # Laporan Task 1–3 (maks. 18 halaman, tidak termasuk lampiran)
+├── laporan.pdf                    # Laporan Task 1–3 (maks. 18 halaman)
 ├── kode/
-│   ├── README.md              # Cara menjalankan dan mereproduksi seluruh angka laporan
-│   └── ...                    # Seluruh source code (+ bobot model akhir atau tautan unduhan)
-├── models/                    # Bobot model terlatih (.pt) dan scaler (.pkl)
-├── prediksi_klasifikasi.csv   # id_unit, kelas
-├── prediksi_rul.csv           # id_unit, rul
-├── cluster.csv                # id_sampel, cluster
-└── kontribusi.md              # Peran anggota, link PR, penggunaan AI tools
+│   ├── README.md                  # Cara menjalankan dan mereproduksi seluruh angka laporan
+│   ├── run_all.py                 # Master pipeline satu perintah reproduksi
+│   ├── run_all.sh                 # Shell wrapper untuk run_all.py
+│   ├── requirements.txt           # Daftar dependensi Python
+│   ├── demo_task1.ipynb           # Notebook demo Task 1
+│   ├── demo_task2.ipynb           # Notebook demo Task 2
+│   ├── demo_task3.ipynb           # Notebook demo Task 3
+│   ├── Task1_Klasifikasi/         # Modul klasifikasi multimodal (GMU)
+│   ├── Task2_RUL/                 # Modul regresi RUL (BiLSTM-Attention)
+│   ├── Task3_Klasterisasi/        # Modul clustering (Autoencoder + DEC)
+│   ├── utils/                     # Data loader dan metrik evaluasi
+│   ├── models/                    # Bobot model terlatih (.pt, .pkl)
+│   └── laporan/                   # Notebook lengkap, figures, dan generator PDF
+├── prediksi_klasifikasi.csv       # id_unit, kelas
+├── prediksi_rul.csv               # id_unit, rul
+├── cluster.csv                    # id_sampel, cluster
+└── kontribusi.md                  # Peran anggota, link PR, penggunaan AI tools
 ```
 
 ## Format File Prediksi
@@ -119,7 +129,7 @@ bash kode/run_all.sh
 - **Seed**: `42` (diatur di satu tempat dan dipakai di semua eksperimen; hasil multi-seed Task 1 memakai seed: `42, 43, 44`)
 - **Versi library**: Python 3.10+ / 3.11, PyTorch >= 2.0 (lihat `kode/requirements.txt`)
 - **Lingkungan**: Mesin lokal / Colab / Kaggle (GPU NVIDIA / CPU fallback)
-- **Bobot model akhir**: tersedia di folder `models/` (`task1_best_model.pt`, `task2_best_model.pt`, `task2_scaler.pkl`, `task3_multimodal_ae.pt`)
+- **Bobot model akhir**: tersedia di `kode/models/` (`task1_best_model.pt`, `task2_best_model.pt`, `task2_scaler.pkl`, `task3_multimodal_ae.pt`)
 
 ## Ketentuan Tugas
 
