@@ -1,69 +1,161 @@
-# UTS Deep Learning - Pipeline Klasifikasi, Regresi & Klasterisasi Multimodal
+# UTS Deep Learning — Kelompok Zacky & Alif (2 Orang)
 
-Repositori ini memuat seluruh implementasi kode, model pembelajaran mendalam (*deep learning*), evaluasi metrik, dan laporan teknis untuk **Take-Home Exam Deep Learning (Semester Ganjil 2026/2027)**.
+**Hands-on Deep Learning: Classification, Regression, and Clustering**
 
-## Anggota Kelompok (2 Orang)
-- **Anggota 1**: ZACKY YUSUP HAKIM (101032300183) – *Lead Pipeline, Task 1 Multimodal Classification*
-- **Anggota 2**: MUHAMMAD ALIF NAUFAL (101032300098) – *Task 2 RUL Regression & Task 3 Multimodal Clustering*
+Repositori ini berisi pengerjaan UTS (tugas kelompok) mata kuliah Deep Learning, Teknik Komputer, Universitas Telkom. Tugas terdiri dari tiga bagian: klasifikasi multimodal, regresi deret waktu, dan clustering multimodal pada gambar, sinyal sensor, spektrum, dan riwayat mesin.
 
----
+## Anggota Kelompok
 
-## Ringkasan Tugas & Metrik Utama
+**Kelompok (2 Orang)**
 
-| Tugas | Domain Data & Modalitas | Arsitektur Utama | Metrik Utama | Skor Validasi |
-|---|---|---|---|:---:|
-| **Task 1: Klasifikasi Defek Produk** | Citra Permukaan (64x64) + Sensor Tekan (3x128) | Gated Multimodal Unit (ResNet2D + 1D-CNN/BiGRU) | Macro-F1 | **0.9124** |
-| **Task 2: Regresi Sisa Umur (RUL)** | 21 Sensor + 3 Setelan Operasi (Window W=30) | BiLSTM + Temporal Attention & MC Dropout | RMSE / Asym Score | **12.84 / 214.5** |
-| **Task 3: Klasterisasi Material** | Mikrostruktur (64x64) + Spektrum (128) | Joint Multimodal Autoencoder + DEC | Silhouette / DB Index | **0.584 / 0.642** |
+| NIM            | Nama                  |
+| -------------- | --------------------- |
+| 101032300098   | Muhammad Alif Naufal  |
+| 101032300183   | Zacky Yusup Hakim     |
 
----
+Peran masing-masing anggota, tautan pull request, dan penggunaan AI tools ada di [`kontribusi.md`](kontribusi.md).
 
-## Struktur Repositori
+## Ringkasan Tugas
 
-```text
-UTS_DL/
-├── data/                      # Dataset resmi (klasifikasi, RUL, clustering)
-├── kode/                      # Seluruh modul kode sumber modular & reproducible
-│   ├── Task1_Klasifikasi/     # Pipeline klasifikasi multimodal & GMU
-│   ├── Task2_RUL/             # Pipeline time-series RUL & Asymmetric Loss
-│   ├── Task3_Klasterisasi/    # Pipeline autoencoder & Deep Embedded Clustering (DEC)
-│   ├── utils/                 # Data loader dan metrik evaluasi
-│   ├── run_all.py             # Script satu perintah master reproduction
-│   └── README.md              # Dokumentasi teknis kode
+| Task | Topik                                               | Target / Output                                                       | Metrik hidden test                          | Bobot |
+| ---- | --------------------------------------------------- | --------------------------------------------------------------------- | ------------------------------------------- | ----- |
+| 1    | Klasifikasi multimodal: cacat produk (gambar + sinyal press) | 7 kelas: `normal`, `gores`, `noda`, `retak`, `gelembung`, `las_dingin`, `kontaminasi` | Macro-F1 (7 kelas)                          | 30    |
+| 2    | Regresi deret waktu: Remaining Useful Life (RUL)    | RUL pada siklus terakhir tiap mesin uji (dibatasi 0–150)              | RMSE dan skor asimetris                     | 30    |
+| 3    | Clustering multimodal: jenis material (36.000 sampel) | Label cluster (jumlah jenis material tidak diberikan)                 | Adjusted Rand Index (ARI)                   | 25    |
+| —    | Ujian lisan individual (20 menit)                   | —                                                                     | —                                           | 15    |
+
+### Task 1 — Klasifikasi Multimodal: Product Defects
+
+Setiap unit diperiksa dengan kamera dan sensor tekan. Sebagian cacat hanya tampak di gambar, sebagian hanya di sinyal sensor, dan sebagian samar di keduanya.
+
+- [x] **a. Eksplorasi**: contoh tiap kelas di kedua modalitas, distribusi kelas, rekaman sensor yang hilang, perbedaan train–test (mis. per lini produksi)
+- [x] **b. Arsitektur**: image encoder (CNN atau ViT kecil) dan signal encoder (1D-CNN, GRU, atau Transformer); bandingkan minimal dua strategi fusi (early fusion, late fusion, cross-attention)
+- [x] **c. Nilai tiap modalitas**: model image-only dan sensor-only, serta kelas mana yang membutuhkan modalitas mana
+- [x] **d. Label tidak sempurna**: cek kemungkinan salah label dari inspektur, uji satu teknik yang tahan noise label (mis. label smoothing atau co-teaching)
+- [x] **e. Pergeseran domain**: performa per lini produksi pada validasi, uji satu teknik penanganan (mis. augmentasi atau normalisasi per lini)
+- [x] **f. Modalitas hilang**: model tetap memberi prediksi wajar saat sensor tidak terekam
+- [x] **g. Training**: sanity check (overfit satu batch), kurva belajar, hasil minimal tiga seed untuk model akhir
+
+### Task 2 — Regresi Deret Waktu: Remaining Useful Life
+
+Memprediksi sisa siklus sebelum mesin press gagal, pada siklus terakhir tiap mesin uji. Label RUL dibatasi 150 siklus.
+
+- [x] **a. Eksplorasi dan praproses**: pengaruh operating settings terhadap sensor, sensor tidak informatif, missing value, spike, dan alasan normalisasi
+- [x] **b. Label**: label RUL training dari riwayat run-to-failure, termasuk batas 150 siklus
+- [x] **c. Sekuens**: sliding window, riwayat dengan panjang berbeda, tanpa kebocoran informasi masa depan
+- [x] **d. Model**: minimal dua arsitektur sekuens (LSTM/GRU, 1D-CNN/TCN, atau Transformer) dengan baseline non-deep-learning
+- [x] **e. Validasi**: split per mesin (bukan per baris); RMSE dan skor asimetris per rentang RUL
+- [x] **f. Ketidakpastian**: interval prediksi (mis. MC dropout atau ensemble) dan diskusi kapan mesin sebaiknya diservis
+
+Skor asimetris pada hidden test, dengan `d = RUL prediksi − RUL aktual`:
+
+```
+s = Σ_mesin ( exp(−d/13) − 1   jika d < 0
+              exp( d/10) − 1   jika d ≥ 0 )
+```
+
+Prediksi yang terlambat (terlalu optimis, `d ≥ 0`) dihukum lebih berat.
+
+### Task 3 — Clustering Multimodal: Material Types
+
+Tiap sampel punya citra mikrostruktur dan spektrum komposisi, tanpa label.
+
+- [x] **a. Eksplorasi**: distorsi gambar (rotasi, skala, kecerahan, perbedaan mikroskop) dan spektrum (shift, baseline, spike)
+- [x] **b. Representasi**: representasi tanpa label (autoencoder, contrastive seperti SimCLR/BYOL, atau pretrained embedding) beserta alasan augmentasi
+- [x] **c. Dua modalitas**: representasi gambar dan spektrum lalu digabung; tunjukkan apa yang hilang jika hanya satu modalitas
+- [x] **d. Clustering**: bandingkan minimal dua metode pada embedding, termasuk satu deep clustering (mis. DEC)
+- [x] **e. Jumlah cluster**: minimal dua kriteria
+- [x] **f. Analisis**: visualisasi UMAP atau t-SNE; cluster mana yang sulit dipisahkan dan mengapa
+
+## Struktur Repositori (branch `main`)
+
+```
+.
+├── laporan.pdf                # Laporan Task 1–3 (maks. 18 halaman, tidak termasuk lampiran)
+├── kode/
+│   ├── README.md              # Cara menjalankan dan mereproduksi seluruh angka laporan
+│   └── ...                    # Seluruh source code (+ bobot model akhir atau tautan unduhan)
 ├── models/                    # Bobot model terlatih (.pt) dan scaler (.pkl)
-├── prediksi/                  # Salinan file prediksi untuk auto-grading
-├── laporan/                   # Berkas laporan & notebook demonstrasi
-│   ├── laporan.pdf            # Laporan akhir lengkap (format akademik Times New Roman)
-│   ├── demo_task1.ipynb       # Notebook demo live Task 1 (pre-rendered outputs)
-│   ├── demo_task2.ipynb       # Notebook demo live Task 2 (pre-rendered outputs)
-│   ├── demo_task3.ipynb       # Notebook demo live Task 3 (pre-rendered outputs)
-│   ├── demo_all_tasks.ipynb   # Master notebook end-to-end all tasks
-│   └── figures/               # Gambar diagnostik dan visualisasi
-├── prediksi_klasifikasi.csv   # Berkas prediksi wajib Task 1 (id_unit, kelas)
-├── prediksi_rul.csv           # Berkas prediksi wajib Task 2 (id_unit, rul)
-├── cluster.csv                # Berkas prediksi wajib Task 3 (id_sampel, cluster)
-├── kontribusi.md              # Lembar kontribusi 2 anggota tim & AI tools declaration
-├── requirements.txt           # Daftar dependensi Python
-└── README.md
+├── prediksi_klasifikasi.csv   # id_unit, kelas
+├── prediksi_rul.csv           # id_unit, rul
+├── cluster.csv                # id_sampel, cluster
+└── kontribusi.md              # Peran anggota, link PR, penggunaan AI tools
 ```
 
----
+## Format File Prediksi
 
-## Cara Menjalankan Demonstrasi (Ujian Lisan 5 Menit)
+Nama file dan nama kolom harus persis sama karena dinilai otomatis.
 
-Pilih salah satu dari dua cara berikut saat ujian lisan di depan dosen:
+| File                       | Kolom                | Aturan                                                                  | Contoh baris pertama |
+| -------------------------- | -------------------- | ----------------------------------------------------------------------- | -------------------- |
+| `prediksi_klasifikasi.csv` | `id_unit,kelas`      | Satu baris per unit uji; `kelas` salah satu dari tujuh nama kelas persis seperti ditulis di atas | `U123456,retak`      |
+| `prediksi_rul.csv`         | `id_unit,rul`        | Satu baris per mesin uji; `rul` di antara 0 dan 150                     | `17,87.5`            |
+| `cluster.csv`              | `id_sampel,cluster`  | Satu baris per sampel; `cluster` bilangan bulat (nomor boleh bebas)     | `S123456,4`          |
 
-### Opsi A: Menggunakan Notebook Per-Task (Rekomendasi Utama)
-Buka salah satu notebook di folder `laporan/` sesuai task yang ditanyakan dosen:
-- **Task 1**: Buka `laporan/demo_task1.ipynb`
-- **Task 2**: Buka `laporan/demo_task2.ipynb`
-- **Task 3**: Buka `laporan/demo_task3.ipynb`
+## Dataset
 
-Tekan **Run All** atau jalankan per sel (`Shift + Enter`). Seluruh grafik, tabel metrik validasi, dan sampel data uji akan muncul seketika (10–15 detik) karena model dimuat langsung dari folder `models/`.
+- Data: `data_uts_dl.zip` ([Google Drive](https://drive.google.com/drive/folders/15TiPGfsw0Irp36QM_zwd_oZnfcQquQ9x?usp=sharing)), berisi 100.000 gambar, 100.000 sinyal sensor dan spektrum, riwayat 1.200 mesin, serta `kamus_data.md` (deskripsi tiap file).
+- Data **tidak** di-commit ke repositori. Unduh dan ekstrak ke folder `data/` sebelum menjalankan kode.
+- Data eksternal tidak diperbolehkan. Pretrained weights yang tersedia untuk umum boleh dipakai dengan menyebutkan sumbernya.
 
-### Opsi B: Satu Perintah CLI (One-Command Reproduction)
-Jalankan script evaluasi dari root folder:
+## Reproduksibilitas
+
+Seluruh angka di laporan dapat direproduksi dengan satu perintah. Detail lengkap ada di [`kode/README.md`](kode/README.md).
+
 ```bash
-python kode/run_all.py --epochs_t1 0 --epochs_t2 0 --epochs_t3 0
+# 1. Clone dan masuk ke repo
+git clone https://github.com/sebastianvettel1212/UTS-Deep-Learning.git
+cd UTS-Deep-Learning
+
+# 2. Install dependensi
+pip install -r kode/requirements.txt
+
+# 3. Letakkan data di folder data/, lalu jalankan seluruh pipeline
+bash kode/run_all.sh
+# Atau eksekusi langsung via Python:
+# python kode/run_all.py --seed 42
 ```
-Skrip akan mencetak seluruh metrik laporan ke terminal tanpa melakukan training ulang dari awal.
+
+- **Seed**: `42` (diatur di satu tempat dan dipakai di semua eksperimen; hasil multi-seed Task 1 memakai seed: `42, 43, 44`)
+- **Versi library**: Python 3.10+ / 3.11, PyTorch >= 2.0 (lihat `kode/requirements.txt`)
+- **Lingkungan**: Mesin lokal / Colab / Kaggle (GPU NVIDIA / CPU fallback)
+- **Bobot model akhir**: tersedia di folder `models/` (`task1_best_model.pt`, `task2_best_model.pt`, `task2_scaler.pkl`, `task3_multimodal_ae.pt`)
+
+## Ketentuan Tugas
+
+- **Metode**: model utama setiap task harus deep learning; metode klasik hanya sebagai baseline.
+- **Tools**: Python dengan PyTorch atau TensorFlow/Keras.
+- **AI tools**: diperbolehkan, dengan keterangan tool yang dipakai, bagian yang dibantu, dan cara verifikasi output. Dicatat di [`kontribusi.md`](kontribusi.md).
+- **Kolaborasi antar kelompok**: dilarang berbagi kode, hasil, atau temuan.
+- **Tanggung jawab**: setiap anggota harus mampu menjelaskan seluruh pekerjaan kelompok.
+
+## Alur Kerja GitHub
+
+1. Satu anggota membuat repositori kelompok.
+2. Setiap anggota **fork** repositori dan bekerja di fork masing-masing.
+3. Perubahan diajukan lewat **pull request** ke repositori kelompok, lalu di-merge ke `main`.
+4. Sebelum deadline, semua fork di-sync dan semua PR di-merge. Branch `main` pada saat deadline yang dinilai.
+
+Kontribusi dinilai dari commit dan pull request di GitHub.
+
+## Jadwal
+
+| Kegiatan             | Tanggal                                                         |
+| -------------------- | --------------------------------------------------------------- |
+| Rilis data           | 10 Nov 2026                                                     |
+| Deadline pengumpulan | 24 Nov 2026, 23:59 (semua fork ter-sync dan semua PR ter-merge) |
+| Ujian lisan          | TBD                                                             |
+
+Keterlambatan: commit setelah deadline dihitung terlambat; nilai kelompok berkurang 10 poin per 24 jam, dan setelah 48 jam tidak diterima.
+
+## Penilaian
+
+**Nilai akhir = nilai kelompok × faktor kontribusi + nilai oral individual**
+
+- Nilai kelompok (Task 1–3): 85 poin; ujian lisan individual: 15 poin.
+- Faktor kontribusi: **1.00** (kontribusi terlihat di GitHub dan mampu menjelaskan), **0.85** (kontribusi ada, penjelasan lemah), **0.70** (tidak mampu menjelaskan atau kontribusi minim).
+- Ujian lisan: 5 menit reproduksi (satu anggota pilihan dosen menjalankan model akhir dan mereproduksi satu angka laporan secara langsung) dan 15 menit tanya jawab tentang semua task.
+
+## Integritas Akademik
+
+Seluruh pekerjaan dalam repositori ini adalah karya asli kelompok dan mengikuti standar integritas akademik.

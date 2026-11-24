@@ -1,91 +1,68 @@
-# Panduan Reprodusibilitas Eksperimen (One-Command Reproduction)
+# kode/ — Cara Menjalankan dan Mereproduksi
 
-Repositori ini memuat seluruh kode, model, dan pipeline evaluasi untuk Take-Home Exam Deep Learning:
-- **Task 1: Multimodal Defect Classification** (Citra Permukaan + Sinyal Sensor Tekan)
-- **Task 2: Time-Series Remaining Useful Life (RUL) Regression** (21 Sensor + 3 Pengaturan Operasi)
-- **Task 3: Multimodal Material Clustering** (Mikrostruktur + Spektrum Komposisi)
+Folder ini berisi seluruh kode untuk UTS Deep Learning (Task 1 klasifikasi, Task 2 regresi RUL, Task 3 clustering). Satu perintah mereproduksi seluruh angka di `laporan.pdf`.
 
----
-
-## 1. Prasyarat & Lingkungan Sistem
-
-### Dependensi & Versi Library
-- **Python**: >= 3.10 (Rekomendasi: 3.11)
-- **PyTorch**: >= 2.2.0 (Mendukung akselerasi CUDA pada GPU NVIDIA)
-- **NumPy**: >= 1.24.0
-- **Pandas**: >= 2.0.0
-- **Scikit-Learn**: >= 1.3.0
-- **SciPy**: >= 1.10.0
-- **Matplotlib & Seaborn**: >= 3.7.0
-- **ReportLab**: >= 4.0.0
-
-### Instalasi Dependensi
-```bash
-# Menggunakan pip standar
-pip install -r requirements.txt
-
-# Atau menggunakan Astral uv (rekomendasi, instalasi sangat cepat)
-uv pip install -r requirements.txt
-```
-
----
-
-## 2. Satu Perintah untuk Mereproduksi Seluruh Hasil (One-Command Reproduction)
-
-Sesuai ketentuan ujian ("One command must reproduce every number in the report"), jalankan perintah berikut dari direktori `kode/`:
+## 1. Persiapan
 
 ```bash
-python run_all.py --seed 42
+git clone https://github.com/sebastianvettel1212/UTS-Deep-Learning.git
+cd UTS-Deep-Learning
+pip install -r kode/requirements.txt
 ```
 
-Perintah di atas secara otomatis akan:
-1. Memuat seluruh dataset dari folder `../data/`.
-2. Melatih model multimodal Task 1 (ResNet2D + 1D-CNN/BiGRU dengan GMU dan Modality Dropout), mengevaluasi metrik validasi Macro-F1, dan menghasilkan file `prediksi_klasifikasi.csv`.
-3. Menjalankan prapemrosesan time-series Task 2, melatih model BiLSTM dengan Temporal Attention dan loss asimetris, mengestimasi ketidakpastian menggunakan MC Dropout, mengevaluasi RMSE dan Asymmetric Score, serta menghasilkan file `prediksi_rul.csv`.
-4. Menjalankan eksplorasi distorsi Task 3, melatih Multimodal Material Autoencoder, mencari jumlah klaster optimal $K$ (Silhouette, Davies-Bouldin, Elbow), menjalankan Deep Embedded Clustering (DEC), memproyeksikan t-SNE / UMAP untuk analisis ablasi modalitas, dan menghasilkan file `cluster.csv`.
-5. Menyimpan visualisasi grafik ke `../laporan/figures/`.
-6. Menampilkan ringkasan metrik performa akhir.
+Unduh `data_uts_dl.zip` dari [Google Drive](https://drive.google.com/drive/folders/15TiPGfsw0Irp36QM_zwd_oZnfcQquQ9x?usp=sharing), lalu ekstrak ke folder `data/` di root repositori (data tidak di-commit). Definisi tiap file ada di `kamus_data.md`.
 
----
+## 2. Satu perintah reproduksi
 
-## 3. Eksekusi Modul Secara Terpisah
-
-Setiap tugas juga dapat dijalankan secara modular:
-
-### Task 1: Klasifikasi Defek Multimodal
 ```bash
-# Melatih model
-python Task1_Klasifikasi/train.py --epochs 12 --batch_size 128 --seed 42
-
-# Menghasilkan prediksi pengujian (prediksi_klasifikasi.csv)
-python Task1_Klasifikasi/predict.py --model_path ../models/task1_best_model.pt
+bash kode/run_all.sh
 ```
-
-### Task 2: Regresi RUL Time-Series
+Atau dapat dieksekusi langsung via Python:
 ```bash
-# Melatih model urutan dan baseline
-python Task2_RUL/train.py --epochs 15 --batch_size 256 --seed 42
-
-# Menghasilkan prediksi pengujian (prediksi_rul.csv) dengan MC Dropout
-python Task2_RUL/predict.py --model_path ../models/task2_best_model.pt
+python kode/run_all.py --seed 42
 ```
 
-### Task 3: Klasterisasi Material Multimodal
-```bash
-# Menjalankan eksplorasi distorsi, pencarian K, DEC, dan visualisasi t-SNE
-python Task3_Klasterisasi/predict.py --epochs_ae 10 --batch_size 256
-```
+Perintah ini menjalankan ketiga task secara berurutan dan menghasilkan:
 
-### Kompilasi Laporan PDF
-```bash
-python ../laporan/generate_report.py
-```
+| Keluaran                   | Task | Format & Keterangan |
+| -------------------------- | ---- | ------------------- |
+| `prediksi_klasifikasi.csv` | 1    | 16.000 baris (`id_unit,kelas`) |
+| `prediksi_rul.csv`         | 2    | 300 baris (`id_unit,rul`, rentang 0–150) |
+| `cluster.csv`              | 3    | 36.000 baris (`id_sampel,cluster`, integer $K=5$) |
 
----
+## 3. Isi folder
 
-## 4. Format dan Verifikasi File Output Prediksi
+| File / folder                | Isi                                                        | Penanggung jawab |
+| ---------------------------- | ---------------------------------------------------------- | ---------------- |
+| `demo_task1.ipynb`           | Task 1: klasifikasi multimodal (gambar + sinyal)           | Zacky            |
+| `demo_task2.ipynb`           | Task 2: regresi RUL                                        | Alif             |
+| `demo_task3.ipynb`           | Task 3: clustering (tahap a–c Zacky, tahap d–f Alif)       | Zacky dan Alif   |
+| `run_all.sh`                 | Menjalankan seluruh pipeline (wrapper shell)               | Bersama          |
+| `run_all.py`                 | Master pipeline eksekusi end-to-end Python                 | Bersama          |
+| `Task1_Klasifikasi/`         | Modul arsitektur GMU, training, dan inferensi Task 1       | Zacky            |
+| `Task2_RUL/`                 | Modul sliding window, BiLSTM-Attention, inferensi Task 2  | Alif             |
+| `Task3_Klasterisasi/`        | Modul Autoencoder, DEC clustering, dan analisis manifold   | Zacky dan Alif   |
+| `utils/`                     | Modul data loader dan perhitungan metrik evaluasi          | Bersama          |
+| `requirements.txt`           | Versi library dependensi                                   | Bersama          |
 
-Semua file prediksi disimpan di root direktori repositori dan di folder `prediksi/`:
-- `prediksi_klasifikasi.csv`: Header `id_unit,kelas` (16.000 baris, 7 kelas valid).
-- `prediksi_rul.csv`: Header `id_unit,rul` (300 baris, nilai RUL dalam rentang $[0, 150]$).
-- `cluster.csv`: Header `id_sampel,cluster` (36.000 baris, integer label klaster).
+## 4. Seed, versi, dan lingkungan
+
+- **Seed**: `42` (diatur secara konsisten di satu tempat dan dipakai di seluruh tahapan pelatihan dan evaluasi). Hasil multi-seed Task 1 memakai seed: `42, 43, 44` (Macro-F1 rata-rata: $0.9124 \pm 0.0031$).
+- **Versi library**: Python `3.10+ / 3.11`, PyTorch `2.2+` (lihat `kode/requirements.txt`).
+- **Lingkungan**: Mesin Lokal (Windows / Linux) / Google Colab / Kaggle dengan GPU NVIDIA CUDA atau CPU fallback.
+
+## 5. Bobot model akhir
+
+- Bobot model akhir untuk tiap task telah disertakan langsung di direktori `models/`:
+  - `models/task1_best_model.pt` (Task 1 Gated Multimodal Unit)
+  - `models/task2_best_model.pt` & `models/task2_scaler.pkl` (Task 2 BiLSTM-Attention)
+  - `models/task3_multimodal_ae.pt` (Task 3 Joint Multimodal Autoencoder)
+- Seluruh ukuran file bobot berada di bawah ambang batas GitHub (< 100 MB), sehingga dapat diakses dan langsung dimuat tanpa unduhan eksternal tambahan.
+- Untuk melatih ulang model dari awal (*retrain*):
+  ```bash
+  python kode/run_all.py --seed 42
+  ```
+
+## 6. Pretrained weights dan sumber
+
+Model dilatih secara *self-supervised* (Autoencoder Task 3) dan *supervised end-to-end* (Task 1 & Task 2) langsung menggunakan dataset resmi tugas UTS Deep Learning. Tidak ada pretrained weights eksternal pihak ketiga atau data proprietary di luar dataset tugas yang digunakan.
