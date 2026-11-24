@@ -1,10 +1,10 @@
 # UTS Deep Learning - Pipeline Klasifikasi, Regresi & Klasterisasi Multimodal
 
-Repositori ini memuat seluruh implementasi kode, model pembelajaran mendalam (*deep learning*), evaluasi metrik, dan laporan teknis 
+Repositori ini memuat seluruh implementasi kode, model pembelajaran mendalam (*deep learning*), evaluasi metrik, dan laporan teknis untuk **Take-Home Exam Deep Learning (Semester Ganjil 2026/2027)**.
 
 ## Anggota Kelompok (2 Orang)
-- **Anggota 1**: [ZACKY YUSUP HAKIM] (101032300183) – *Lead Pipeline, Task 1 Multimodal Classification*
-- **Anggota 2**: [MUHAMMAD ALIF NAUFAL] (101032300098) – *Task 2 RUL Regression & Task 3 Multimodal Clustering*
+- **Anggota 1**: ZACKY YUSUP HAKIM (101032300183) – *Lead Pipeline, Task 1 Multimodal Classification*
+- **Anggota 2**: MUHAMMAD ALIF NAUFAL (101032300098) – *Task 2 RUL Regression & Task 3 Multimodal Clustering*
 
 ---
 
@@ -16,6 +16,7 @@ Repositori ini memuat seluruh implementasi kode, model pembelajaran mendalam (*d
 | **Task 2: Regresi Sisa Umur (RUL)** | 21 Sensor + 3 Setelan Operasi (Window W=30) | BiLSTM + Temporal Attention & MC Dropout | RMSE / Asym Score | **12.84 / 214.5** |
 | **Task 3: Klasterisasi Material** | Mikrostruktur (64x64) + Spektrum (128) | Joint Multimodal Autoencoder + DEC | Silhouette / DB Index | **0.584 / 0.642** |
 
+---
 
 ## Struktur Repositori
 
@@ -32,7 +33,7 @@ UTS_DL/
 ├── models/                    # Bobot model terlatih (.pt) dan scaler (.pkl)
 ├── prediksi/                  # Salinan file prediksi untuk auto-grading
 ├── laporan/                   # Berkas laporan & notebook demonstrasi
-│   ├── laporan.pdf            # Laporan akhir lengkap (8 halaman)
+│   ├── laporan.pdf            # Laporan akhir lengkap (format akademik Times New Roman)
 │   ├── demo_task1.ipynb       # Notebook demo live Task 1 (pre-rendered outputs)
 │   ├── demo_task2.ipynb       # Notebook demo live Task 2 (pre-rendered outputs)
 │   ├── demo_task3.ipynb       # Notebook demo live Task 3 (pre-rendered outputs)
@@ -46,3 +47,23 @@ UTS_DL/
 └── README.md
 ```
 
+---
+
+## Cara Menjalankan Demonstrasi (Ujian Lisan 5 Menit)
+
+Pilih salah satu dari dua cara berikut saat ujian lisan di depan dosen:
+
+### Opsi A: Menggunakan Notebook Per-Task (Rekomendasi Utama)
+Buka salah satu notebook di folder `laporan/` sesuai task yang ditanyakan dosen:
+- **Task 1**: Buka `laporan/demo_task1.ipynb`
+- **Task 2**: Buka `laporan/demo_task2.ipynb`
+- **Task 3**: Buka `laporan/demo_task3.ipynb`
+
+Tekan **Run All** atau jalankan per sel (`Shift + Enter`). Seluruh grafik, tabel metrik validasi, dan sampel data uji akan muncul seketika (10–15 detik) karena model dimuat langsung dari folder `models/`.
+
+### Opsi B: Satu Perintah CLI (One-Command Reproduction)
+Jalankan script evaluasi dari root folder:
+```bash
+python kode/run_all.py --epochs_t1 0 --epochs_t2 0 --epochs_t3 0
+```
+Skrip akan mencetak seluruh metrik laporan ke terminal tanpa melakukan training ulang dari awal.
