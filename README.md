@@ -1,6 +1,6 @@
 # UTS Deep Learning - Pipeline Klasifikasi, Regresi & Klasterisasi Multimodal
 
-Repositori ini memuat seluruh implementasi kode, model pembelajaran mendalam (*deep learning*), evaluasi metrik, dan laporan teknis untuk **Take-Home Exam Deep Learning (Semester Ganjil 2026/2027)**.
+Repositori ini memuat seluruh implementasi kode, model pembelajaran mendalam (*deep learning*), evaluasi metrik, dan laporan teknis 
 
 ## Anggota Kelompok (2 Orang)
 - **Anggota 1**: [ZACKY YUSUP HAKIM] (101032300183) – *Lead Pipeline, Task 1 Multimodal Classification*
