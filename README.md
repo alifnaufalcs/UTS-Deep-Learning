@@ -1,4 +1,4 @@
-# UTS Deep Learning — Kelompok Zacky & Alif (2 Orang)
+# UTS Deep Learning
 
 **Hands-on Deep Learning: Classification, Regression, and Clustering**
 
