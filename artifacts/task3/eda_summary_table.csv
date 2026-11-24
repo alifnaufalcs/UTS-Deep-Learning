@@ -1,0 +1,13 @@
+Metric,Value
+Total Samples,"36,000"
+Image Mean Brightness (All),135.09 +/- 14.70
+Image Mean Brightness (M1),127.80 +/- 12.06
+Image Mean Brightness (M2),146.07 +/- 11.02
+Image Brightness Difference (M2 - M1),+18.27
+Image Contrast (Std) All,19.78 +/- 5.10
+Spectrum Min / Max,"[-1.663, 6.152]"
+Spectrum Global Mean / Std,0.448 +/- 0.407
+Samples with Spike Noise (threshold=0.8),"7,974 (22.15%)"
+Total Spikes Detected,"9,083"
+Baseline Slope Mean / Std,0.5789 +/- 0.6821
+Baseline Curvature Mean / Std,-0.6978 +/- 0.6596

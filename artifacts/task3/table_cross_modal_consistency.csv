@@ -1,0 +1,4 @@
+Pair Comparison,Cross-Modal ARI,Interpretation
+Image-Only vs Spectrum-Only,0.006630851078903515,Tingkat kesepakatan independen antara mikrostruktur dan spektrum kimia
+Image-Only vs Multimodal Fusion,0.01005157036904918,Seberapa kuat informasi mikrostruktur terintegrasi ke dalam fusi
+Spectrum-Only vs Multimodal Fusion,0.889383531213865,Seberapa kuat informasi komposisi kimia terintegrasi ke dalam fusi
