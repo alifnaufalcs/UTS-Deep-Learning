@@ -40,7 +40,7 @@ Perintah ini menjalankan ketiga task secara berurutan dan menghasilkan:
 | `run_all.sh`                 | Menjalankan seluruh pipeline (wrapper shell)               | Bersama          |
 | `run_all.py`                 | Master pipeline eksekusi end-to-end Python                 | Bersama          |
 | `models/`                    | Bobot model terlatih (.pt, .pkl) untuk tiap task           | Bersama          |
-| `laporan/`                   | Notebook lengkap, figures, dan generator PDF laporan       | Bersama          |
+| `laporan/`                   | Figures laporan, skrip generate_report.py, dan PDF         | Bersama          |
 | `Task1_Klasifikasi/`         | Modul arsitektur GMU, training, dan inferensi Task 1       | Zacky            |
 | `Task2_RUL/`                 | Modul sliding window, BiLSTM-Attention, inferensi Task 2  | Alif             |
 | `Task3_Klasterisasi/`        | Modul Autoencoder, DEC clustering, dan analisis manifold   | Zacky dan Alif   |

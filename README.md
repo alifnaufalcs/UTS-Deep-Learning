@@ -85,7 +85,7 @@ Tiap sampel punya citra mikrostruktur dan spektrum komposisi, tanpa label.
 │   ├── Task3_Klasterisasi/        # Modul clustering (Autoencoder + DEC)
 │   ├── utils/                     # Data loader dan metrik evaluasi
 │   ├── models/                    # Bobot model terlatih (.pt, .pkl)
-│   └── laporan/                   # Notebook lengkap, figures, dan generator PDF
+│   └── laporan/                   # Figures laporan, skrip generate_report.py, dan PDF
 ├── prediksi_klasifikasi.csv       # id_unit, kelas
 ├── prediksi_rul.csv               # id_unit, rul
 ├── cluster.csv                    # id_sampel, cluster
