@@ -88,7 +88,7 @@ Tiap sampel punya citra mikrostruktur dan spektrum komposisi, tanpa label.
 │   └── laporan/                   # Figures laporan, skrip generate_report.py, dan PDF
 ├── prediksi_klasifikasi.csv       # id_unit, kelas
 ├── prediksi_rul.csv               # id_unit, rul
-├── cluster.csv                    # id_sampel, cluster
+├── prediksi_cluster.csv           # id_sampel, cluster
 └── kontribusi.md                  # Peran anggota, link PR, penggunaan AI tools
 ```
 
@@ -100,7 +100,7 @@ Nama file dan nama kolom harus persis sama karena dinilai otomatis.
 | -------------------------- | -------------------- | ----------------------------------------------------------------------- | -------------------- |
 | `prediksi_klasifikasi.csv` | `id_unit,kelas`      | Satu baris per unit uji; `kelas` salah satu dari tujuh nama kelas persis seperti ditulis di atas | `U123456,retak`      |
 | `prediksi_rul.csv`         | `id_unit,rul`        | Satu baris per mesin uji; `rul` di antara 0 dan 150                     | `17,87.5`            |
-| `cluster.csv`              | `id_sampel,cluster`  | Satu baris per sampel; `cluster` bilangan bulat (nomor boleh bebas)     | `S123456,4`          |
+| `prediksi_cluster.csv`      | `id_sampel,cluster`  | Satu baris per sampel; `cluster` bilangan bulat (nomor boleh bebas)     | `S123456,4`          |
 
 ## Dataset
 
