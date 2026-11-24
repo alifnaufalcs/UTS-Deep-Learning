@@ -34,9 +34,9 @@ Perintah ini menjalankan ketiga task secara berurutan dan menghasilkan:
 
 | File / folder                | Deskripsi Modul / Berkas                                   |
 | ---------------------------- | ---------------------------------------------------------- |
-| `01_Classification.ipynb`   | Notebook utama final Task 1: klasifikasi multimodal        |
-| `demo_task2.ipynb`           | Notebook demonstrasi Task 2: regresi deret waktu RUL       |
-| `demo_task3.ipynb`           | Notebook demonstrasi Task 3: clustering multimodal         |
+| `01_Classification.ipynb`    | Notebook utama Task 1: klasifikasi multimodal              |
+| `02_regresi.ipynb`           | Notebook utama Task 2: regresi deret waktu RUL             |
+| `03_clustering.ipynb`        | Notebook utama Task 3: clustering multimodal (Tahap a–c)   |
 | `run_all.sh`                 | Menjalankan seluruh pipeline (wrapper shell)               |
 | `run_all.py`                 | Master pipeline eksekusi end-to-end Python                 |
 | `models/`                    | Bobot model terlatih (.pt, .pkl) untuk tiap task           |

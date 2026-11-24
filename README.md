@@ -71,24 +71,28 @@ Tiap sampel punya citra mikrostruktur dan spektrum komposisi, tanpa label.
 
 ```
 .
-├── laporan.pdf                    # Laporan Task 1–3 (maks. 18 halaman)
+├── laporan.pdf                    # Laporan Task 1–3 (format akademik)
 ├── kode/
 │   ├── README.md                  # Cara menjalankan dan mereproduksi seluruh angka laporan
 │   ├── run_all.py                 # Master pipeline satu perintah reproduksi
 │   ├── run_all.sh                 # Shell wrapper untuk run_all.py
 │   ├── requirements.txt           # Daftar dependensi Python
-│   ├── 01_Classification.ipynb    # Notebook utama final Task 1 (Multimodal Classification)
-│   ├── demo_task2.ipynb           # Notebook demo Task 2
-│   ├── 03_clustering.ipynb        # Notebook utama final Task 3 (Multimodal Clustering)
-│   ├── Task1_Klasifikasi/         # Modul klasifikasi multimodal (GMU)
+│   ├── 01_Classification.ipynb    # Notebook utama Task 1 (Multimodal Classification)
+│   ├── 02_regresi.ipynb           # Notebook utama Task 2 (Time-Series RUL Regression)
+│   ├── 03_clustering.ipynb        # Notebook utama Task 3 (Multimodal Clustering Tahap a-c)
+│   ├── Task1_Klasifikasi/         # Modul klasifikasi multimodal
 │   ├── Task2_RUL/                 # Modul regresi RUL (BiLSTM-Attention)
 │   ├── Task3_Klasterisasi/        # Modul clustering (Autoencoder + DEC)
 │   ├── utils/                     # Data loader dan metrik evaluasi
-│   ├── models/                    # Bobot model terlatih (.pt, .pkl)
+│   ├── models/                    # Bobot model terlatih (.pt, .pkl, .pth)
 │   └── laporan/                   # Figures laporan, skrip generate_report.py, dan PDF
+├── artifacts/                     # Visualisasi, tabel evaluasi, dan checkpoints task
+│   ├── task1/                     # Figur, tabel, dan checkpoints seed Task 1
+│   └── task3/                     # Figur distorsi, kurva K, tabel, dan SimCLR model Task 3
 ├── prediksi_klasifikasi.csv       # id_unit, kelas
 ├── prediksi_rul.csv               # id_unit, rul
-├── prediksi_cluster.csv           # id_sampel, cluster
+├── cluster.csv                    # id_sampel, cluster
+├── prediksi_cluster.csv           # id_sampel, cluster (alias)
 └── kontribusi.md                  # Peran anggota, link PR, penggunaan AI tools
 ```
 
