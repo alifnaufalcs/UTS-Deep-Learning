@@ -32,20 +32,20 @@ Perintah ini menjalankan ketiga task secara berurutan dan menghasilkan:
 
 ## 3. Isi folder
 
-| File / folder                | Isi                                                        | Penanggung jawab |
-| ---------------------------- | ---------------------------------------------------------- | ---------------- |
-| `demo_task1.ipynb`           | Task 1: klasifikasi multimodal (gambar + sinyal)           | Zacky            |
-| `demo_task2.ipynb`           | Task 2: regresi RUL                                        | Alif             |
-| `demo_task3.ipynb`           | Task 3: clustering (tahap a–c Zacky, tahap d–f Alif)       | Zacky dan Alif   |
-| `run_all.sh`                 | Menjalankan seluruh pipeline (wrapper shell)               | Bersama          |
-| `run_all.py`                 | Master pipeline eksekusi end-to-end Python                 | Bersama          |
-| `models/`                    | Bobot model terlatih (.pt, .pkl) untuk tiap task           | Bersama          |
-| `laporan/`                   | Figures laporan, skrip generate_report.py, dan PDF         | Bersama          |
-| `Task1_Klasifikasi/`         | Modul arsitektur GMU, training, dan inferensi Task 1       | Zacky            |
-| `Task2_RUL/`                 | Modul sliding window, BiLSTM-Attention, inferensi Task 2  | Alif             |
-| `Task3_Klasterisasi/`        | Modul Autoencoder, DEC clustering, dan analisis manifold   | Zacky dan Alif   |
-| `utils/`                     | Modul data loader dan perhitungan metrik evaluasi          | Bersama          |
-| `requirements.txt`           | Versi library dependensi                                   | Bersama          |
+| File / folder                | Deskripsi Modul / Berkas                                   |
+| ---------------------------- | ---------------------------------------------------------- |
+| `demo_task1.ipynb`           | Notebook demonstrasi Task 1: klasifikasi multimodal        |
+| `demo_task2.ipynb`           | Notebook demonstrasi Task 2: regresi deret waktu RUL       |
+| `demo_task3.ipynb`           | Notebook demonstrasi Task 3: clustering multimodal         |
+| `run_all.sh`                 | Menjalankan seluruh pipeline (wrapper shell)               |
+| `run_all.py`                 | Master pipeline eksekusi end-to-end Python                 |
+| `models/`                    | Bobot model terlatih (.pt, .pkl) untuk tiap task           |
+| `laporan/`                   | Figures laporan, skrip generate_report.py, dan PDF         |
+| `Task1_Klasifikasi/`         | Modul arsitektur GMU, training, dan inferensi Task 1       |
+| `Task2_RUL/`                 | Modul sliding window, BiLSTM-Attention, inferensi Task 2  |
+| `Task3_Klasterisasi/`        | Modul Autoencoder, DEC clustering, dan analisis manifold   |
+| `utils/`                     | Modul data loader dan perhitungan metrik evaluasi          |
+| `requirements.txt`           | Versi library dependensi                                   |
 
 ## 4. Seed, versi, dan lingkungan
 
