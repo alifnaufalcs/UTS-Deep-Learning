@@ -79,7 +79,7 @@ Tiap sampel punya citra mikrostruktur dan spektrum komposisi, tanpa label.
 │   ├── requirements.txt           # Daftar dependensi Python
 │   ├── demo_task1.ipynb           # Notebook demo Task 1
 │   ├── demo_task2.ipynb           # Notebook demo Task 2
-│   ├── demo_task3.ipynb           # Notebook demo Task 3
+│   ├── multimodal_clustering_pipeline.ipynb # Notebook utama final Task 3 (Multimodal Clustering)
 │   ├── Task1_Klasifikasi/         # Modul klasifikasi multimodal (GMU)
 │   ├── Task2_RUL/                 # Modul regresi RUL (BiLSTM-Attention)
 │   ├── Task3_Klasterisasi/        # Modul clustering (Autoencoder + DEC)
