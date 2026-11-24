@@ -79,7 +79,7 @@ Tiap sampel punya citra mikrostruktur dan spektrum komposisi, tanpa label.
 │   ├── requirements.txt           # Daftar dependensi Python
 │   ├── 01_Classification.ipynb    # Notebook utama Task 1 (Multimodal Classification)
 │   ├── 02_regresi.ipynb           # Notebook utama Task 2 (Time-Series RUL Regression)
-│   ├── 03_clustering.ipynb        # Notebook utama Task 3 (Multimodal Clustering Tahap a-c)
+│   ├── 03_clustering.ipynb        # Notebook utama Task 3 (Multimodal Clustering Tahap a–f)
 │   ├── Task1_Klasifikasi/         # Modul klasifikasi multimodal
 │   ├── Task2_RUL/                 # Modul regresi RUL (BiLSTM-Attention)
 │   ├── Task3_Klasterisasi/        # Modul clustering (Autoencoder + DEC)
