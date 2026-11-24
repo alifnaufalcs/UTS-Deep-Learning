@@ -77,7 +77,7 @@ Tiap sampel punya citra mikrostruktur dan spektrum komposisi, tanpa label.
 │   ├── run_all.py                 # Master pipeline satu perintah reproduksi
 │   ├── run_all.sh                 # Shell wrapper untuk run_all.py
 │   ├── requirements.txt           # Daftar dependensi Python
-│   ├── demo_task1.ipynb           # Notebook demo Task 1
+│   ├── 01_Classification.ipynb    # Notebook utama final Task 1 (Multimodal Classification)
 │   ├── demo_task2.ipynb           # Notebook demo Task 2
 │   ├── 03_clustering.ipynb        # Notebook utama final Task 3 (Multimodal Clustering)
 │   ├── Task1_Klasifikasi/         # Modul klasifikasi multimodal (GMU)

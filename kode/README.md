@@ -34,7 +34,7 @@ Perintah ini menjalankan ketiga task secara berurutan dan menghasilkan:
 
 | File / folder                | Deskripsi Modul / Berkas                                   |
 | ---------------------------- | ---------------------------------------------------------- |
-| `demo_task1.ipynb`           | Notebook demonstrasi Task 1: klasifikasi multimodal        |
+| `01_Classification.ipynb`   | Notebook utama final Task 1: klasifikasi multimodal        |
 | `demo_task2.ipynb`           | Notebook demonstrasi Task 2: regresi deret waktu RUL       |
 | `demo_task3.ipynb`           | Notebook demonstrasi Task 3: clustering multimodal         |
 | `run_all.sh`                 | Menjalankan seluruh pipeline (wrapper shell)               |

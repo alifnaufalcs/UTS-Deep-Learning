@@ -28,7 +28,7 @@ Task 3 dibagi dua: Zacky mengerjakan tahap a–c, Alif mengerjakan tahap d–f. 
 - Penentuan jumlah cluster optimal ($K=5$) berdasarkan evaluasi multi-kriteria: Silhouette Score, Davies-Bouldin Index, dan Calinski-Harabasz Index.
 - Visualisasi manifold 2D interaktif (UMAP dan t-SNE) serta analisis komprehensif mengenai cluster material yang memiliki batas separasi samar akibat noise komposisi spektral.
 
-**Zacky Yusup Hakim: Task 1** (`kode/demo_task1.ipynb`, `prediksi_klasifikasi.csv`)
+**Zacky Yusup Hakim: Task 1** (`kode/01_Classification.ipynb`, `prediksi_klasifikasi.csv`)
 
 - Eksplorasi data: analisis visual contoh sampel 7 kelas pada citra dan sensor tekan, distribusi frekuensi kelas, analisis missing sensor modality, serta variasi distribusi per lini produksi.
 - Perancangan arsitektur: ResNet visual encoder, 1D-CNN/BiGRU sensor encoder, dan perbandingan strategi fusi (Early Concatenation vs Late Fusion vs Gated Multimodal Unit).
