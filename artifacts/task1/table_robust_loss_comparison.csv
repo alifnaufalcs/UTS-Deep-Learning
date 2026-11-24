@@ -1,0 +1,4 @@
+Teknik_Loss,Macro_F1,Accuracy
+Baseline (Weighted CrossEntropy),0.3177,0.5959
+Label Smoothing (eps=0.1),0.2957,0.5918
+Soft Bootstrapping Loss (beta=0.8),0.0255,0.09

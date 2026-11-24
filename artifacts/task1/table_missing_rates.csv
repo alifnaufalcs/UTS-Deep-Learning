@@ -1,0 +1,12 @@
+Kategori,Total_Sampel,Sensor_Missing,Persen_Missing
+Kelas: normal,23888,1138,4.76
+Kelas: gores,5623,291,5.18
+Kelas: noda,4773,247,5.17
+Kelas: retak,3606,200,5.55
+Kelas: gelembung,3430,175,5.1
+Kelas: las_dingin,4323,203,4.7
+Kelas: kontaminasi,2357,98,4.16
+Lini Train A,35964,1748,4.86
+Lini Train B,12036,604,5.02
+Lini Test A,6393,338,5.29
+Lini Test B,9607,475,4.94

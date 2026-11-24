@@ -1,0 +1,10 @@
+Metrik,Train,Test
+Jumlah Unit,"48,000","16,000"
+Lini A (%),74.92%,39.96%
+Lini B (%),25.07%,60.04%
+Sensor Missing (%),4.90%,5.08%
+Image Mean Pixel,132.75,122.94
+Image Std Pixel,20.33,22.41
+Suhu Mean (°C),181.62,182.33
+Getaran Mean (rel),0.00,0.00
+Arus Mean (A),8.46,8.44

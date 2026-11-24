@@ -1,0 +1,4 @@
+Arsitektur,Strategi_Fusi,Jumlah_Parameter,Waktu_Latih_Detik,Macro_F1,Accuracy,F1_normal,F1_gores,F1_noda,F1_retak,F1_gelembung,F1_las_dingin,F1_kontaminasi,Modalitas
+concat,Early/Concat,1831623,297.4,0.3177,0.5959,0.7405,0.0178,0.0,0.0,0.6342,0.8315,0.0,Multimodal (Image + Sensor)
+image_only,,1259879,73.4,0.0959,0.498,0.6653,0.0,0.0063,0.0,0.0,0.0,0.0,Image-Only
+signal_only,,539367,53.0,0.4048,0.6343,0.7312,0.0,0.0,0.5536,0.6565,0.8926,0.0,Sensor-Only
